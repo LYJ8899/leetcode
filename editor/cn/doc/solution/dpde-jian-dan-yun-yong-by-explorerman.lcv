@@ -1,0 +1,26 @@
+### 解题思路
+
+![image.png](https://pic.leetcode-cn.com/cab593be54f1ff0d6183f1470b21cb4071b4961b1a47fe8d03fadae87b06c9cd-image.png)
+
+暴力破解，两个for循环遍历出所有结果，找到最优解。
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+          if(prices.length == 0) return 0;
+        int max = Integer.MIN_VALUE;
+        for(int i = 0; i < prices.length; i++){
+            for(int j = i+1; j < prices.length; j++){
+               max = Math.max(prices[j] - prices[i],max);
+            }
+        }
+        if(max <= 0) return 0; 
+        return max;
+    }
+}
+```
+

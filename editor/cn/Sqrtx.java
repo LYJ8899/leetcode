@@ -1,4 +1,4 @@
-  //给你一个非负整数 x ，计算并返回 x 的 算术平方根 。 
+//给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
 //
 // 由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。 
 //
@@ -31,18 +31,39 @@
 //
 // Related Topics 数学 二分查找 👍 1517 👎 0
 
-  
-  package cn;
-  public class Sqrtx{
-      public static void main(String[] args) {
-           Solution solution = new Sqrtx().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int mySqrt(int x) {
-        return 0;
+
+package cn;
+
+public class Sqrtx {
+    public static void main(String[] args) {
+        Solution solution = new Sqrtx().new Solution();
+
+        solution.mySqrt(2147395599);
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int mySqrt(int x) {
+            if (x < 1) {
+                return 0;
+            } else if (x == 1) {
+                return 1;
+            }
+            return binarySearch(1, x, x);
+        }
+
+        public int binarySearch(double left, double right, int target) {
+            int mid = (int) Math.floor(((left + right) / 2));
+            if ((Math.pow(mid, 2) > target)) {
+                return binarySearch(left, mid, target);
+            } else if ((Math.pow(mid, 2) == target) || (Math.pow(mid + 1, 2) > target)) {
+                return mid;
+
+            } else {
+                return binarySearch(mid, right, target);
+            }
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
-  }
+}

@@ -53,7 +53,6 @@ public class PartitionList {
      */
     class Solution {
         public ListNode partition(ListNode head, int x) {
-
             if (head == null) {
                 return null;
             } else if (head.next == null) {
@@ -65,18 +64,23 @@ public class PartitionList {
             ListNode subHead = head.val >= x ? head : null;
             head = virNode;
             while (head != null) {
-                if (insert.val == Integer.MIN_VALUE && head.next.val >= x && subHead == null) {
+                if (insert.val == Integer.MIN_VALUE && head.next != null && head.next.val >= x && subHead == null) {
                     insert = head;
                     subHead = head.next;
                 }
                 if (head.next != null && head.next.val < x && subHead != null) {
-                    //todo: 寻找右节点
-                    ListNode rNode = head.next.next;
                     ListNode moveNode = head.next;
-                    head.next = rNod
-                    moveNode.next = subHead;
-                    subHead = moveNode;
-                    insert.next = subHead;
+                    while (moveNode != null && moveNode.val < x) {
+                        ListNode nextNode = moveNode.next;
+                        head.next = nextNode;
+
+                        moveNode.next = subHead;
+                        subHead = moveNode;
+                        insert.next = subHead;
+                        insert = moveNode;
+                        subHead = insert.next;
+                        moveNode = nextNode;
+                    }
                 }
                 head = head.next;
             }
